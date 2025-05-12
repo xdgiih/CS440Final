@@ -1,0 +1,32 @@
+supply multiple frames per video
+
+add prompts directing model's attention to UIs, GTA's got a map bottom right, valorant has abilities on the bottom mid, CS has guns and utils on the bottom right, rust has inventory at the bottom mid.
+
+100% accuracy when using gemma-3-27b-it, 5 ref for val and CS, 3 ref for rust and GTA.
+still gets it wrong when using only 1 reference photo
+look into why there is image encode and decode time
+look into speculative decoding, using miniCPM as the draft model and use gemma 27b for main model
+
+if still not confident when running gemma, reprompt with more and more references, discard the categories with low scores(eg if score is below 3 and difference to other scores is above 2)
+
+with the combination(miniCPM first and then gemma), 80%(16/20) accuracy can be achieved in 10 + 143 + 35 + 876 = 1064 seconds or 17.73 minutes
+
+try less and more information per frame to see changes on speed and accuracy
+
+also start working on video IO - videos implemented, added main.py to run IO.py(gets first frame) -> vidsort -> vidsort_refine on re folder -> IO to reconstruct videos
+
+think about moving/self-adjusting threshold based on categories
+
+check for perf and accuracy difference
+
+full image vs bottom 1/3
+hybrid vs just gemma
+1 ref image vs 3 vs 5
+provide multiple frames per video
+compare against having refine using more and more references or just using 5 reference
+
+smarter prompting - upload the reference images first with the prompt "compare against these" - before was 1745 seconds
+
+google collab
+
+get baseline and comapre to optimized model
